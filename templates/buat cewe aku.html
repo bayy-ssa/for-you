@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Untuk Salsa, Sayangku ❤️</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="hearts" aria-hidden="true"></div>
+  <main class="card">
+    <p class="eyebrow">DIBUAT KHUSUS UNTUK KAMU</p>
+    <div class="photo-frame">
+      <img src="{{ url_for('static', filename='images/salsa.jpg') }}" alt="Foto Salsa">
+      <span class="photo-heart">♥</span>
+    </div>
+    <p class="hello">Ada seseorang yang ingin aku bahagiakan...</p>
+    <h1>Hai Sayangku! <span>♡</span></h1>
+    <p class="intro">Akuu punyaa sesuatuuu buatt kamuuu.</p>
+
+    <div class="music-box">
+      <div class="music-icon">♫</div>
+      <div class="music-info"><strong>Perfect</strong><small>Ed Sheeran</small></div>
+      <button id="musicButton" class="music-button" type="button">▶ Putar musik</button>
+    </div>
+    <p class="music-note">Tekan tombol untuk memutar lagu. Perlu koneksi internet.</p>
+    <div class="youtube-wrap">
+      <iframe id="youtubeFrame" title="Perfect - Ed Sheeran"
+        src="https://www.youtube-nocookie.com/embed/2Vv-BfVoq4g?enablejsapi=1&playsinline=1"
+        allow="autoplay; encrypted-media; picture-in-picture"></iframe>
+    </div>
+
+    <button id="letterButton" class="main-button" type="button">Buka surat dari aku 💌</button>
+    <section id="letter" class="letter" hidden>
+      <div class="letter-top">♡ BUAT SALSA TERSAYANG ♡</div>
+      <h2>Haiiii sayaangggg.</h2>
+      <p>makasiii udaa adaaa diii hiduppp akuu. Makasih udaa mauu adaa dii idupp akuu yaaa sayanggg. Akuu mungkinn nggakk selaluu pandaii merangkaii kataa, tapii akuu mauu kamuu tahuu kalauu kamuu berartii bangett buatt akuu.</p>
+      <p>Akuu mintaa maaff kaloo akuu masii banyakk nyakitinn kamunyaa, Semogaa kitaa selaluu baikkk baikk ajaa yaaa sayanggg.</p>
+      <p class="signature">Akuu sayanggg kamuu. ❤️</p>
+    </section>
+
+    <button id="surpriseButton" class="text-button" type="button">Klik kalau mau kejutan kecil ✨</button>
+    <p id="surprise" class="surprise" hidden>Intinyaa akuuu senengg udaa ketemuu kamuuu. I love you sayanggg! 💗</p>
+    <footer>Dibuat dengan sayang, khusus untuk Cewe aku ♡</footer>
+  </main>
+<script>
+  const letterButton = document.getElementById("letterButton");
+  const letter = document.getElementById("letter");
+  letterButton.addEventListener("click", () => {
+    letter.hidden = !letter.hidden;
+    letterButton.textContent = letter.hidden ? "Buka surat dari aku 💌" : "Tutup surat 💗";
+  });
+
+  const surpriseButton = document.getElementById("surpriseButton");
+  const surprise = document.getElementById("surprise");
+  surpriseButton.addEventListener("click", () => {
+    surprise.hidden = !surprise.hidden;
+    surpriseButton.textContent = surprise.hidden ? "Klik kalau mau kejutan kecil ✨" : "Simpan kejutan 💕";
+  });
+
+  const musicButton = document.getElementById("musicButton");
+  const youtubeFrame = document.getElementById("youtubeFrame");
+  let playing = false;
+  musicButton.addEventListener("click", () => {
+    youtubeFrame.contentWindow.postMessage(JSON.stringify({
+      event: "command", func: playing ? "pauseVideo" : "playVideo", args: []
+    }), "*");
+    playing = !playing;
+    musicButton.textContent = playing ? "Ⅱ Jeda musik" : "▶ Putar musik";
+  });
+
+  const hearts = document.querySelector(".hearts");
+  const symbols = ["♥", "♡", "💗"];
+  for (let i = 0; i < 24; i++) {
+    const heart = document.createElement("span");
+    heart.className = "falling-heart";
+    heart.textContent = symbols[i % symbols.length];
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (8 + Math.random() * 8) + "s";
+    heart.style.animationDelay = (Math.random() * 10) + "s";
+    heart.style.fontSize = (12 + Math.random() * 16) + "px";
+    hearts.appendChild(heart);
+  }
+</script>
+</body>
+</html>
