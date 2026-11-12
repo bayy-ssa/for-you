@@ -1,9 +1,5 @@
 WEBSITE UNTUK SALSA ❤️
 Pertahankan struktur folder:
-app.py
-requirements.txt
-templates/index.html
-static/style.css
 static/images/salsa.jpg
 
 Jalankan lokal: py -m pip install -r requirements.txt
